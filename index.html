@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <meta charset="UTF-8">
+    <head>
+        <title>ゴルフアプリ</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+        <link rel="stylesheet" href="css/index.css">
+        <script>
+
+            $(document).ready(function(){
+                $('.modal_pop').hide();
+                $('.slider').bxSlider({
+                    pager: false,
+                    controls: false,
+                    infiniteLoop: false,
+                    onSlideAfter: function($slideElement){
+                        if($slideElement.children("img").attr("rel") == "par3"){
+                            $('.modal_pop').fadeIn();
+                        }   
+                    }
+                });
+                $('.js-modal-close').on('click',function(){
+                    $('.modal_pop').fadeOut();
+                })
+            });
+        </script>    
+    </head>
+
+    <body>
+        <div class="slider">
+            <div><img src="img/hole1.jpeg" alt="hole1"></div>
+            <div><img src="img/hole2.jpeg" alt="hole2"></div>
+            <div><img src="img/hole3.jpeg" alt="hole3"></div>
+            <div><img src="img/hole4.jpeg" alt="hole4" rel="par3"></div>
+            <div><img src="img/hole5.jpeg" alt="hole5"></div>
+            <div><img src="img/hole6.jpeg" alt="hole6" rel="par3"></div>
+            <div><img src="img/hole7.jpeg" alt="hole7"></div>
+            <div><img src="img/hole8.jpeg" alt="hole8"></div>
+            <div><img src="img/hole9.jpeg" alt="hole9"></div>
+        </div>
+        <div class="modal_pop">
+            <div class="bg js-modal-close">
+
+            </div>
+            <div class="modal_pop_main">
+                <h4>いざというときのホールインワン保険！</h4>
+                <p>
+                    あなたがPar3でホールインワンになる確率は<br>
+                    なんと<span class="red">xx%</span>です！<br>
+                    いざというときのために
+                    <span>ホールインワン保険</span>を申し込んでおきませんか？
+                </p>
+                <div class="button012">
+                    <a href="#">ホールインワン保険</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
