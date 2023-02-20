@@ -13,6 +13,21 @@
 
             $(document).ready(function(){
 
+                $('.modal_pop').hide();
+                $('.slider').bxSlider({
+                    pager: false,
+                    controls: false,
+                    infiniteLoop: false,
+                    onSlideAfter: function($slideElement){
+                        if($slideElement.children("img").attr("rel") == "par3"){
+                            $('.modal_pop').fadeIn();
+                        }   
+                    }
+                });
+                $('.js-modal-close').on('click',function(){
+                    $('.modal_pop').fadeOut();
+                })
+
             // 住所検索ボタンを押すと外部apiを叩く処理が走る。
             $('#search_address_btn').click(function() {
                 $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
@@ -43,27 +58,7 @@
                 $('#address3').val('');
             })
             })
-        
-        </script>
 
-        <script>
-
-            $(document).ready(function(){
-                $('.modal_pop').hide();
-                $('.slider').bxSlider({
-                    pager: false,
-                    controls: false,
-                    infiniteLoop: false,
-                    onSlideAfter: function($slideElement){
-                        if($slideElement.children("img").attr("rel") == "par3"){
-                            $('.modal_pop').fadeIn();
-                        }   
-                    }
-                });
-                $('.js-modal-close').on('click',function(){
-                    $('.modal_pop').fadeOut();
-                })
-            });
         </script>
 
           
