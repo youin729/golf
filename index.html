@@ -17,7 +17,7 @@
             $('#search_address_btn').click(function() {
                 $.getJSON('http://zipcloud.ibsnet.co.jp/api/search?callback=?',
                     {
-                        zipcode: $('#zip_code').val()
+                    zipcode: $('#zip_code').val()
                     }
                 )
                 .done(function(data) {
@@ -41,7 +41,7 @@
                 $('#address2').val('');
                 $('#address3').val('');
             })
-            })        
+            })
         
         </script>
 
