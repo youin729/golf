@@ -8,7 +8,43 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
         <link rel="stylesheet" href="index.css">
+
+        <script>
+
+            $(document).ready(function(){
+
+            // 住所検索ボタンを押すと外部apiを叩く処理が走る。
+            $('#search_address_btn').click(function() {
+                $.getJSON('http://zipcloud.ibsnet.co.jp/api/search?callback=?',
+                    {
+                    zipcode: $('#zip_code').val()
+                    }
+                )
+                .done(function(data) {
+                    if (!data.results) {
+                        alert('該当の住所がありません');
+                    } else {
+                        let result = data.results[0];
+                        $('#address1').val(result.address1);
+                        $('#address2').val(result.address2);
+                        $('#address3').val(result.address3);
+                    }
+                }).fail(function(){
+                    alert('入力値を確認してください。');
+                })
+            })
+
+            // クリアボタンを押すと、フォームの中身がリセットされる。
+            $('#search_clear_btn').click(function(){
+                $('#zip_code').val('');
+                $('#address1').val('');
+                $('#address2').val('');
+                $('#address3').val('');
+            })
+            })        
         
+        </script>
+
         <!-- 
         <script>
 
@@ -31,77 +67,36 @@
         </script>
         -->
 
-        <script>
-            let search = document.getElementById('search');
-            search.addEventListener('click', ()=>{
-        
-                let api = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
-                let error = document.getElementById('error');
-                let input = document.getElementById('input');
-                let address1 = document.getElementById('address1');
-                let address2 = document.getElementById('address2');
-                let address3 = document.getElementById('address3');
-                let param = input.value.replace("-",""); //入力された郵便番号から「-」を削除
-                let url = api + param;
-        
-                fetchJsonp(url, {
-                    timeout: 10000, //タイムアウト時間
-                })
-                .then((response)=>{
-                    error.textContent = ''; //HTML側のエラーメッセージ初期化
-                    return response.json();  
-                })
-                .then((data)=>{
-                    if(data.status === 400){ //エラー時
-                        error.textContent = data.message;
-                    }else if(data.results === null){
-                        error.textContent = '郵便番号から住所が見つかりませんでした。';
-                    } else {
-                        address1.value = data.results[0].address1;
-                        address2.value = data.results[0].address2;
-                        address3.value = data.results[0].address3;
-                    }
-                })
-                .catch((ex)=>{ //例外処理
-                    console.log(ex);
-                });
-            }, false);
-          </script>
           
     </head>
 
     <body>
         
-        <form>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>郵便番号</th>
-                        <td>
-                            <input id="input" class="zipcode" type="text" name="zipcode" value="" placeholder="例)8120012">
-                            <button id="search" type="button">住所検索</button>
-                            <p id="error"></p>
-                        </td>
-                    </tr>
+      <div class="container col-6">
+        <h1 style="text-align: center; margin-top: 2.4rem; margin-bottom: 1.6rem">入力フォーム</h1>
+        <div>
+          <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
+            郵便番号<br />
+            <input type="text" name="zip_code" style="width:100px" id="zip_code">
+            <input type="button" value="住所検索" id="search_address_btn">
+            <input type="button" value="クリア" id="search_clear_btn">
+            <br />
+            都道府県<br />
+            <input type="text" name="address1" style="width:500px" id="address1"><br />
+            市区町村<br />
+            <input type="text" name="address2" style="width:500px" id="address2"><br />
+            その他<br />
+            <input type="text" name="address3" style="width:500px" id="address3"><br />
+            建物名など<br />
+            <input type="text" name="address4" style="width:500px"><br />
+            <br />
+            <div class="submit_button_right" style="text-align: right;">
+              <input type="submit"><br />
+            </div>
+          </form>
+        </div>
+      </div>
 
-                    <tr>
-                        <th>都道府県</th>
-                        <td><input id="address1" type="text" name="address1" value=""></td>
-                    </tr>
-
-                    <tr>
-                        <th>市区町村</th>
-                        <td><input id="address2" type="text" name="address2" value=""></td>
-                    </tr>
-
-                    <tr>
-                        <th>町域</th>
-                        <td><input id="address3" type="text" name="address3" value=""></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-        
         <!-- 
         <div class="slider">
             <div><img src="hole1.jpeg" alt="hole1"></div>
