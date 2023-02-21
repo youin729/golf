@@ -28,6 +28,30 @@
               //      $('.modal_pop').fadeOut();
               //  })
 
+            // protosureボタンの処理
+            $('#protosure_btn').click(function() {
+                $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
+                    {
+                        zipcode: $('#denominator').val()
+                    }
+            )
+                
+                .done(function(data) {
+                    if (!data.results) {
+                        alert('該当の住所がありません');
+                    } else {
+                        let result = data.results[0];
+                        $('#premium').val(result.address1);
+                    }
+                }).fail(function(){
+                    alert('入力値を確認してください。');
+                })
+            })
+
+
+
+
+
             // 住所検索ボタンを押すと外部apiを叩く処理が走る。
             $('#search_address_btn').click(function() {
                 $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
@@ -72,7 +96,7 @@
         <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
           分母<br />
           <input type="text" name="denominator" style="width:100px" id="denominator">
-          <input type="button" value="保険料見積" id="search_address_btn">
+          <input type="button" value="保険料見積" id="protosure_btn">
           <input type="button" value="クリア" id="search_clear_btn">
           <br />
           保険料<br />
