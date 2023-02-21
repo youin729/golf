@@ -30,9 +30,12 @@
 
             // 住所検索ボタンを押すと外部apiを叩く処理が走る。
             $('#search_address_btn').click(function() {
-                $.getJSON('https://api-test-jp.protosure.io/public-api/05e16d6f-d4ff-4be4-b74b-0dc17b23281d/quotes/get_or_create/'
+                $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
+                    {
+                        zipcode: $('#zip_code').val()
+                    }
             )
-
+                
                 .done(function(data) {
                     if (!data.results) {
                         alert('該当の住所がありません');
