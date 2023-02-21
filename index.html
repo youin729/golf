@@ -13,20 +13,20 @@
 
             $(document).ready(function(){
 
-                $('.modal_pop').hide();
-                $('.slider').bxSlider({
-                    pager: false,
-                    controls: false,
-                    infiniteLoop: false,
-                    onSlideAfter: function($slideElement){
-                        if($slideElement.children("img").attr("rel") == "par3"){
-                            $('.modal_pop').fadeIn();
-                        }   
-                    }
-                });
-                $('.js-modal-close').on('click',function(){
-                    $('.modal_pop').fadeOut();
-                })
+              //  $('.modal_pop').hide();
+              //  $('.slider').bxSlider({
+              //      pager: false,
+              //      controls: false,
+              //      infiniteLoop: false,
+              //      onSlideAfter: function($slideElement){
+              //          if($slideElement.children("img").attr("rel") == "par3"){
+              //              $('.modal_pop').fadeIn();
+              //         }   
+              //      }
+              //  });
+              //  $('.js-modal-close').on('click',function(){
+              //      $('.modal_pop').fadeOut();
+              //  })
 
             // 住所検索ボタンを押すと外部apiを叩く処理が走る。
             $('#search_address_btn').click(function() {
@@ -68,8 +68,22 @@
 
     <body>
         
+      <div>
+        <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
+          分母<br />
+          <input type="text" name="denominator" style="width:100px" id="denominator">
+          <input type="button" value="保険料見積" id="search_address_btn">
+          <input type="button" value="クリア" id="search_clear_btn">
+          <br />
+          保険料<br />
+          <input type="text" name="premium" style="width:500px" id="premium"><br />
+          <br />
+        </form>
+      </div>
 
-        <div class="slider">
+
+
+        <!-- <div class="slider">
             <div><img src="hole1.jpeg" alt="hole1"></div>
             <div><img src="hole2.jpeg" alt="hole2"></div>
             <div><img src="hole3.jpeg" alt="hole3"></div>
@@ -79,7 +93,8 @@
             <div><img src="hole7.jpeg" alt="hole7"></div>
             <div><img src="hole8.jpeg" alt="hole8"></div>
             <div><img src="hole9.jpeg" alt="hole9"></div>
-        </div>
+        </div> -->
+
         <div class="modal_pop">
             <div class="bg js-modal-close">
 
