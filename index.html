@@ -21,6 +21,7 @@
                    onSlideAfter: function($slideElement){
                        if($slideElement.children("img").attr("rel") == "par3"){
                            $('.modal_pop').fadeIn();
+                           $('#denominator').val((Math.floor(Math.random()*400+1))*100);
                       }   
                    }
                });
@@ -151,8 +152,8 @@
             <div class="modal_pop_main">
                 <h4>いざというときのホールインワン保険！</h4>
                 <p>
-                    あなたがPar3でホールインワンになる確率は<br>
-                    なんと<span class="red">xx分の1</span>です！<br>
+                    あなたがこのホール(Par3)でホールインワンになる確率は<br>
+                    なんと<span class="red"><input type="text" name="denominator" style="width:100px" id="denominator">分の1</span>です！<br>
                     いざというときのために
                     <span>ホールインワン保険</span>を申し込んでおきませんか？
                 </p>
@@ -163,10 +164,7 @@
                     <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
 
                       氏名
-                      <input type="text" name="name" style="width:100px" id="name" value="南本 肇"><br /><br />
-            
-                      分母
-                      <input type="text" name="denominator" style="width:100px" id="denominator"><br /><br />
+                      <input type="text" name="name" style="width:100px" id="name" value="南本 肇"> 様<br /><br />
             
                       <!-- 申込開始（見積ID取得）ボタン -->
                       <input type="button" value="申込開始（見積ID取得）" id="getOrCreateQuotePublic_btn">
@@ -185,7 +183,7 @@
                       <input type="button" value="保険料見積" id="calculateRaterQuotePublic_btn"><br />
             
                       保険料
-                      <input type="text" name="premium" style="width:100px" id="premium"><br /><br />
+                      <input type="text" name="premium" style="width:100px" id="premium"> 円<br /><br />
             
                       <!-- 加入ボタン -->
                       <input type="button" value="加入" id="submitQuotePublic_btn"><br />
