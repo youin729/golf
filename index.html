@@ -64,10 +64,10 @@
                 });
             });
 
-            $("#protosure_btn").on("click", function(){
+            $("#updateInputDataQuotePublic_btn_btn").on("click", function(){
                 $.ajax({
                   type: "PATCH",
-                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/759c12c2-b160-4314-b39e-486d136a829a/update_input_data/",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/" + id + "/update_input_data/",
                         dataType : "json",
                         contentType: "application/json",
                         data: JSON.stringify({
