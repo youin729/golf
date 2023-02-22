@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <meta charset="UTF-8">
+    <head>
+        <title>ゴルフアプリ</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+        <link rel="stylesheet" href="index2.css">
+
+        <script>
+            $(document).ready(function(){
+                $('.modal_pop').hide();
+                $('#secondBlock').hide();
+                $('.slider').bxSlider({
+                   pager: false,
+                   controls: false,
+                   infiniteLoop: false,
+                   onSlideAfter: function($slideElement){
+                        if($slideElement.children("img").attr("rel") == "par3"){
+                           $('.modal_pop').fadeIn();
+                           //ホールインワン確率の算出
+                           $('#denominator').text((Math.floor(Math.random()*400+1))*100);
+                        }   
+                   }
+                });
+                $('.js-modal-close').on('click',function(){
+                    $('.modal_pop').fadeOut();
+                })
+
+                const tenant_id = "05e16d6f-d4ff-4be4-b74b-0dc17b23281d";
+
+                // ①quote_idを取得する処理
+                $("#getOrCreateQuotePublic_btn").on("click", function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/get_or_create/",
+                        dataType : "json",
+                        contentType: "application/json",
+                    }).done(function(data){
+                        const quote_id = data.id
+                        // ②confirmationを行う処理
+                        $.ajax({
+                            type: "PATCH",
+                            url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/" + quote_id + "/update_input_data/",
+                            dataType : "json",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                "inputData": {
+                                    "Name": $('#name').text(),
+                                    "Denominator": $('#denominator').text()
+                                }
+                            }),
+                        }).done(function(data){
+                            // ③保険料取得を行う処理
+                            $.ajax({
+                                type: "POST",
+                                url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/" + quote_id + "/calculate_rater/",
+                                dataType : "json",
+                                contentType: "application/json",
+                            }).done(function(data){
+                                $("#firstCancel").hide()
+                                $('#premium').text(data.raterData.output_Premium);
+                                $("#quote_id").val(quote_id)
+                                $("#secondBlock").fadeIn();
+                            }).fail(function(){
+                                alert('③保険料取得を行う処理に失敗しました');
+                            })
+                        }).fail(function(){
+                            alert('②confirmationを行う処理に失敗しました');
+                        })
+                    }).fail(function(){
+                        alert('①quote_idを取得する処理に失敗しました');
+                    });
+                });
+
+                // ④申し込み処理
+                $("#submitQuotePublic_btn").on("click", function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/" + $('#quote_id').val() + "/submit/",
+                        dataType : "json",
+                        contentType: "application/json",
+                    }).done(function(data){
+                        $('#beforeSubmission').hide();
+                        $('#afterSubmission').css('display', 'block');
+                    }).fail(function(){
+                        alert('入力値を確認してください。');
+                    });
+                });
+            })
+        </script>     
+    </head>
+
+    <body>
+        
+      <div class="slider">
+            <div><img src="hole1.jpeg" alt="hole1"></div>
+            <div><img src="hole2.jpeg" alt="hole2"></div>
+            <div><img src="hole3.jpeg" alt="hole3"></div>
+            <div><img src="hole4.jpeg" alt="hole4" rel="par3"></div>
+            <div><img src="hole5.jpeg" alt="hole5"></div>
+            <div><img src="hole6.jpeg" alt="hole6" rel="par3"></div>
+            <div><img src="hole7.jpeg" alt="hole7"></div>
+            <div><img src="hole8.jpeg" alt="hole8"></div>
+            <div><img src="hole9.jpeg" alt="hole9"></div>
+        </div>
+
+        <div class="modal_pop">
+            <div class="bg js-modal-close">
+            </div>
+            
+            <div class="modal_pop_main">
+                <div id="beforeSubmission">
+                    <h4>いざというときために！<img src="scoara.png" alt="スコアラ"></h4>
+                    <p>
+                        <b id="name">南本 肇様</b>がこのホール(Par3)で<br>
+                        ホールインワンになる確率は
+                    </p>
+                    <p class="center">
+                        なんと<span class="red"><span id="denominator"></span>分の1</span>です！
+                    </p>
+                    <p>
+                        いざというときのためにホールインワン保険を申し込んでおきませんか？
+                    </p>
+                    <div class="button012">
+                        <button id="getOrCreateQuotePublic_btn" class="first">気になる</button>
+                    </div>
+                    <div class="button012 bottom" id="firstCancel">
+                        <button class="cancel js-modal-close">興味ない</button>
+                    </div>
+
+                    <div id="secondBlock">
+                        <p class="sm">
+                            ホールインワンを達成したら、コンペ参加者への記念品やキャディさんへのチップなどで
+                        </p>
+                        <p class="center sm">
+                            <span class="red">総額10万円</span>もかかります。
+                        </p>
+                        <p class="sm">
+                            今ならなんと<span><b id="premium"></b>円</span>で急な出費を保償します！<br>
+                            <a href="https://www.henkaq.com/c/holeinone" target="_blank">ご祝儀の例</a><br>
+                            <a href="https://www.zelkova.net/golf/common/images/pdf/yakkan_holeinone.pdf" target="_blank">詳しい約款はこちら</a>
+                        </p>
+                        <input type="hidden" id="quote_id">
+                        <div class="button012">
+                            <button id="submitQuotePublic_btn">申し込む</button>
+                        </div>
+                        <div class="button012 bottom">
+                            <button class="cancel js-modal-close">興味ない</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="afterSubmission">
+                    <h4>申込みが完了しました！</h4>
+                    <p class="center">
+                        安心してホールインワンを狙ってください！<br>
+                        <img src="scoara2.png" alt="スコアラ2" style="margin-top:20px; width:200px">
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
