@@ -52,9 +52,15 @@
 
             $("#protosure_btn").on("click", function(){
                 $.ajax({
-                    type: "POST",
-                    url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/get_or_create/",
-                    dataType : "json"
+                  type: "PATCH",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/6577fdb2-fc21-4a89-b921-19fa2826dd81/update_input_data/",
+                        dataType : "json",
+                        data: {
+                            "inputData": {
+                                "Name": "南本肇",
+                                "Denominator": 10000
+                            }
+                        }
                 }).done(function(data){
                     let id = data.id;
                     $('#quote_id').val(id);
