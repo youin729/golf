@@ -21,16 +21,16 @@
                    onSlideAfter: function($slideElement){
                        if($slideElement.children("img").attr("rel") == "par3"){
                            $('.modal_pop').fadeIn();
-                           $('denominator').val('');
-                           $('quote_id').val('');
-                           $('confirmation').val('');
-                           $('premium').val('');
-                           $('submission').val('');
                       }   
                    }
                });
                $('.js-modal-close').on('click',function(){
-                   $('.modal_pop').fadeOut();
+                    $('.modal_pop').fadeOut();
+                    $('denominator').val('');
+                    $('quote_id').val('');
+                    $('confirmation').val('');
+                    $('premium').val('');
+                    $('submission').val('');
                })
 
             // protosureボタンの処理
