@@ -48,10 +48,12 @@
             //     })
             // })
 
+              const tenant_id = "05e16d6f-d4ff-4be4-b74b-0dc17b23281d";
+
             $("#protosure_btn").on("click", function(){
                 $.ajax({
                     type: "POST",
-                    url: "https://api-test-jp.protosure.io/public-api/05e16d6f-d4ff-4be4-b74b-0dc17b23281d/quotes/get_or_create/",
+                    url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/get_or_create/",
                     dataType : "json"
                 }).done(function(data){
                     $('#premium').val(data.id);
