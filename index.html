@@ -9,7 +9,6 @@
         <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
         <link rel="stylesheet" href="index.css">
 
-
         <script>
 
             $(document).ready(function(){
@@ -48,20 +47,20 @@
             //         alert('入力値を確認してください。');
             //     })
             // })
-                
-            const tenant_id = "05e16d6f-d4ff-4be4-b74b-0dc17b23281d";
+
+              const tenant_id = "05e16d6f-d4ff-4be4-b74b-0dc17b23281d";
 
             $("#protosure_btn").on("click", function(){
                 $.ajax({
-                    type: "POST",
-                    url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/get_or_create/",
-                    dataType : "json"
+                  type: "POST",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/get_or_create/",
+                        dataType : "json",
                 }).done(function(data){
                     let id = data.id;
                     $('#quote_id').val(id);
                     $.ajax({
                         type: "PATCH",
-                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/6577fdb2-fc21-4a89-b921-19fa2826dd81/update_input_data/",
+                        url: "https://api-test-jp.protosure.io/public-api/" + tenant_id + "/quotes/" + id + "/update_input_data/",
                         dataType : "json",
                         data: {
                             "inputData": {
@@ -82,38 +81,39 @@
 
 
 
+
             // 住所検索ボタンを押すと外部apiを叩く処理が走る。
-            // $('#search_address_btn').click(function() {
-            //     $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
-            //         {
-            //             zipcode: $('#zip_code').val()
-            //         }
-            // )
+            $('#search_address_btn').click(function() {
+                $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
+                    {
+                        zipcode: $('#zip_code').val()
+                    }
+            )
                 
-            //     .done(function(data) {
-            //         if (!data.results) {
-            //             alert('該当の住所がありません');
-            //         } else {
-            //             let result = data.results[0];
-            //             $('#address1').val(result.address1);
-            //             $('#address2').val(result.address2);
-            //             $('#address3').val(result.address3);
-            //             $('#address4').val('This is the test.');
-            //         }
-            //     }).fail(function(){
-            //         alert('入力値を確認してください。');
-            //     })
-            // })
+                .done(function(data) {
+                    if (!data.results) {
+                        alert('該当の住所がありません');
+                    } else {
+                        let result = data.results[0];
+                        $('#address1').val(result.address1);
+                        $('#address2').val(result.address2);
+                        $('#address3').val(result.address3);
+                        $('#address4').val('This is the test.');
+                    }
+                }).fail(function(){
+                    alert('入力値を確認してください。');
+                })
+            })
 
             // クリアボタンを押すと、フォームの中身がリセットされる。
-            // $('#search_clear_btn').click(function(){
-            //     $('#zip_code').val('');
-            //     $('#address1').val('');
-            //     $('#address2').val('');
-            //     $('#address3').val('');
-            //     $('#address4').val('');
-            // })
-            // })
+            $('#search_clear_btn').click(function(){
+                $('#zip_code').val('');
+                $('#address1').val('');
+                $('#address2').val('');
+                $('#address3').val('');
+                $('#address4').val('');
+            })
+            })
 
         </script>
 
@@ -121,8 +121,7 @@
     </head>
 
     <body>
-
-
+        
       <div>
         <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
           分母<br />
@@ -154,10 +153,8 @@
 
         <!-- <div class="modal_pop">
             <div class="bg js-modal-close">
-
             </div>
             
-
             <div class="modal_pop_main">
                 <h4>いざというときのホールインワン保険！</h4>
                 <p>
@@ -166,7 +163,6 @@
                     いざというときのために
                     <span>ホールインワン保険</span>を申し込んでおきませんか？
                 </p>
-
                 <div class="container col-6">
                   <h1 style="text-align: center; margin-top: 2.4rem; margin-bottom: 1.6rem">入力フォーム</h1>
                   <div>
@@ -192,8 +188,6 @@
                   </div>
                 </div>
           
-
-
                 <div class="button012">
                     <a href="#">ホールインワン保険</a>
                 </div>
