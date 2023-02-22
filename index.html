@@ -71,13 +71,12 @@
                         contentType: "application/json",
                         data: JSON.stringify({
                             "inputData": {
-                                "Name": "南本肇",
-                                "Denominator": 20000
+                                "Name": $('#name').val(),
+                                "Denominator": $('#denominator').val()
                             }
                         }),
                 }).done(function(data){
-                    let denominator = data.formData.Denominator;
-                    $('#premium').val(denominator);
+                    $('#confirmation').val("OK");
                 }).fail(function(){
                     alert('入力値を確認してください。');
                 });
@@ -144,6 +143,11 @@
 
           <!-- 申込情報送信ボタン -->
           <input type="button" value="申込情報送信" id="updateInputDataQuotePublic_btn"><br />
+
+          <br />
+          申込情報送信確認
+          <input type="text" name="confirmation" style="width:500px" id="confirmation"><br />
+
 
           <!-- 保険料見積ボタン -->
           <input type="button" value="保険料見積" id="calculateRaterQuotePublic_btn"><br />
