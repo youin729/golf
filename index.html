@@ -13,20 +13,20 @@
 
             $(document).ready(function(){
 
-              //  $('.modal_pop').hide();
-              //  $('.slider').bxSlider({
-              //      pager: false,
-              //      controls: false,
-              //      infiniteLoop: false,
-              //      onSlideAfter: function($slideElement){
-              //          if($slideElement.children("img").attr("rel") == "par3"){
-              //              $('.modal_pop').fadeIn();
-              //         }   
-              //      }
-              //  });
-              //  $('.js-modal-close').on('click',function(){
-              //      $('.modal_pop').fadeOut();
-              //  })
+               $('.modal_pop').hide();
+               $('.slider').bxSlider({
+                   pager: false,
+                   controls: false,
+                   infiniteLoop: false,
+                   onSlideAfter: function($slideElement){
+                       if($slideElement.children("img").attr("rel") == "par3"){
+                           $('.modal_pop').fadeIn();
+                      }   
+                   }
+               });
+               $('.js-modal-close').on('click',function(){
+                   $('.modal_pop').fadeOut();
+               })
 
             // protosureボタンの処理
             // $('#protosure_btn').click(function() {
@@ -109,30 +109,6 @@
                 });
             });
 
-
-            // 住所検索ボタンを押すと外部apiを叩く処理が走る。
-            // $('#search_address_btn').click(function() {
-            //     $.getJSON('https://zipcloud.ibsnet.co.jp/api/search?callback=?',
-            //         {
-            //             zipcode: $('#zip_code').val()
-            //         }
-            // )
-                
-            //     .done(function(data) {
-            //         if (!data.results) {
-            //             alert('該当の住所がありません');
-            //         } else {
-            //             let result = data.results[0];
-            //             $('#address1').val(result.address1);
-            //             $('#address2').val(result.address2);
-            //             $('#address3').val(result.address3);
-            //             $('#address4').val('This is the test.');
-            //         }
-            //     }).fail(function(){
-            //         alert('入力値を確認してください。');
-            //     })
-            // })
-
             // クリアボタンを押すと、フォームの中身がリセットされる。
             // $('#search_clear_btn').click(function(){
             //     $('#zip_code').val('');
@@ -151,48 +127,7 @@
 
     <body>
         
-      <div>
-        <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
-
-          氏名
-          <input type="text" name="name" style="width:100px" id="name"><br /><br />
-
-          分母
-          <input type="text" name="denominator" style="width:100px" id="denominator"><br /><br />
-
-          <!-- 申込開始（見積ID取得）ボタン -->
-          <input type="button" value="申込開始（見積ID取得）" id="getOrCreateQuotePublic_btn">
-
-          <br />
-          Quote_id
-          <input type="text" name="quote_id" style="width:500px" id="quote_id"><br /><br />
-
-          <!-- 申込情報送信ボタン -->
-          <input type="button" value="申込情報送信" id="updateInputDataQuotePublic_btn"><br />
-
-          申込情報送信確認
-          <input type="text" name="confirmation" style="width:100px" id="confirmation"><br /><br />
-
-
-          <!-- 保険料見積ボタン -->
-          <input type="button" value="保険料見積" id="calculateRaterQuotePublic_btn"><br />
-
-          保険料
-          <input type="text" name="premium" style="width:100px" id="premium"><br /><br />
-
-          <!-- 加入ボタン -->
-          <input type="button" value="加入" id="submitQuotePublic_btn">
-
-          申込情報送信確認
-          <input type="text" name="submission" style="width:100px" id="submission"><br /><br />
-
-          <br />
-        </form>
-      </div>
-
-
-
-        <!-- <div class="slider">
+      <div class="slider">
             <div><img src="hole1.jpeg" alt="hole1"></div>
             <div><img src="hole2.jpeg" alt="hole2"></div>
             <div><img src="hole3.jpeg" alt="hole3"></div>
@@ -202,9 +137,9 @@
             <div><img src="hole7.jpeg" alt="hole7"></div>
             <div><img src="hole8.jpeg" alt="hole8"></div>
             <div><img src="hole9.jpeg" alt="hole9"></div>
-        </div> -->
+        </div>
 
-        <!-- <div class="modal_pop">
+        <div class="modal_pop">
             <div class="bg js-modal-close">
             </div>
             
@@ -212,32 +147,50 @@
                 <h4>いざというときのホールインワン保険！</h4>
                 <p>
                     あなたがPar3でホールインワンになる確率は<br>
-                    なんとなんとなんと<span class="red">xx%</span>です！<br>
+                    なんと<span class="red">xx分の1</span>です！<br>
                     いざというときのために
                     <span>ホールインワン保険</span>を申し込んでおきませんか？
                 </p>
                 <div class="container col-6">
                   <h1 style="text-align: center; margin-top: 2.4rem; margin-bottom: 1.6rem">入力フォーム</h1>
                   <div>
+
                     <form method="post" action="#" style="width: fit-content; margin: 0 auto;">
-                      郵便番号<br />
-                      <input type="text" name="zip_code" style="width:100px" id="zip_code">
-                      <input type="button" value="住所検索" id="search_address_btn">
-                      <input type="button" value="クリア" id="search_clear_btn">
+
+                      氏名
+                      <input type="text" name="name" style="width:100px" id="name" value="南本 肇"><br /><br />
+            
+                      分母
+                      <input type="text" name="denominator" style="width:100px" id="denominator"><br /><br />
+            
+                      <!-- 申込開始（見積ID取得）ボタン -->
+                      <input type="button" value="申込開始（見積ID取得）" id="getOrCreateQuotePublic_btn">
+            
                       <br />
-                      都道府県<br />
-                      <input type="text" name="address1" style="width:500px" id="address1"><br />
-                      市区町村<br />
-                      <input type="text" name="address2" style="width:500px" id="address2"><br />
-                      その他<br />
-                      <input type="text" name="address3" style="width:500px" id="address3"><br />
-                      建物名など<br />
-                      <input type="text" name="address4" style="width:500px" id="address4"><br />
+                      Quote_id
+                      <input type="text" name="quote_id" style="width:500px" id="quote_id"><br /><br />
+            
+                      <!-- 申込情報送信ボタン -->
+                      <input type="button" value="申込情報送信" id="updateInputDataQuotePublic_btn"><br />
+            
+                      申込情報送信確認
+                      <input type="text" name="confirmation" style="width:100px" id="confirmation"><br /><br />
+            
+                      <!-- 保険料見積ボタン -->
+                      <input type="button" value="保険料見積" id="calculateRaterQuotePublic_btn"><br />
+            
+                      保険料
+                      <input type="text" name="premium" style="width:100px" id="premium"><br /><br />
+            
+                      <!-- 加入ボタン -->
+                      <input type="button" value="加入" id="submitQuotePublic_btn"><br />
+            
+                      加入完了確認
+                      <input type="text" name="submission" style="width:100px" id="submission"><br /><br />
+            
                       <br />
-                      <div class="submit_button_right" style="text-align: right;">
-                        <input type="submit"><br />
-                      </div>
                     </form>
+
                   </div>
                 </div>
           
@@ -245,7 +198,7 @@
                     <a href="#">ホールインワン保険</a>
                 </div>
             </div>
-        </div> -->
+        </div>
 
     </body>
 </html>
