@@ -1,11 +1,12 @@
 html{
   font-size:26px;
+  font-family: -apple-system, BlinkMacSystemFont, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", HiraKakuProN-W3, sans-serif;
 }
 .bx-wrapper img {
   width: 100%;
   display: block;
+  margin-top: -50px;
 }
-
 
 /* =================================
  modal
@@ -30,7 +31,7 @@ html{
   position: absolute;
   left: 10%;
   width: 80%;
-  top: 10%;
+  top: 5%;
   z-index:9999!important;
   padding: 25px 25px 60px;
   background: #fff url(./back.jpeg) no-repeat center;
