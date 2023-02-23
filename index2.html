@@ -19,9 +19,12 @@
                    infiniteLoop: false,
                    onSlideAfter: function($slideElement){
                         if($slideElement.children("img").attr("rel") == "par3"){
-                           $('.modal_pop').fadeIn();
-                           //ホールインワン確率の算出
-                           $('#denominator').text((Math.floor(Math.random()*400+1))*100);
+                            //初期化処理
+                            init()
+                            
+                           　$('.modal_pop').fadeIn();
+                           　//ホールインワン確率の算出
+                           　$('#denominator').text((Math.floor(Math.random()*400+1))*100);
                         }   
                    }
                 });
@@ -89,6 +92,17 @@
                         alert('入力値を確認してください。');
                     });
                 });
+                
+                // 初期化処理
+                function init(){
+                    $('#premium').text('');
+                    $("#quote_id").val('');
+                    $("#secondBlock").hide();
+                    $('#afterSubmission').css('display', 'none');
+                    $('#beforeSubmission').show();
+                    $("#firstCancel").show();
+                }
+
             })
         </script>     
     </head>
@@ -136,7 +150,7 @@
                             ホールインワンを達成したら、コンペ参加者への記念品やキャディさんへのチップなどで
                         </p>
                         <p class="center sm">
-                            <span class="red">総額10万円</span>もかかります。
+                            <span class="red">総額30万円</span>もかかります。
                         </p>
                         <p class="sm">
                             今ならなんと<span><b id="premium"></b>円</span>で急な出費を保償します！<br>
@@ -158,6 +172,9 @@
                         安心してホールインワンを狙ってください！<br>
                         <img src="scoara2.png" alt="スコアラ2" style="margin-top:20px; width:200px">
                     </p>
+                    <div class="button012 bottom">
+                        <button class="js-modal-close">閉じる</button>
+                    </div>
                 </div>
             </div>
         </div>
